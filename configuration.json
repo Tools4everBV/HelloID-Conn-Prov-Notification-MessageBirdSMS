@@ -1,0 +1,34 @@
+[
+    {
+      "key": "baseUri",
+      "type": "input",
+      "defaultValue": "",
+      "templateOptions": {
+        "label": "Base URL of endpoint",
+        "placeholder": "Please enter some text",
+        "description": "Some optional description",
+        "required": true
+      }
+    },
+    {
+      "key": "accesskey",
+      "type": "input",
+      "defaultValue": "",
+      "templateOptions": {
+        "label": "AccessKey",
+        "type": "password",
+        "placeholder": "Please enter a accesskey",
+        "required": false
+      }
+    },
+    {
+      "key": "originator",
+      "type": "input",
+      "defaultValue": "",
+      "templateOptions": {
+        "label": "Sending from",
+        "placeholder": "Please enter a name or number",
+        "required": false
+      }
+    }
+  ]
