@@ -26,10 +26,6 @@ _HelloID-Conn-Prov-Notification-MessageBirdSMS_ is a _notifcation_ connector. Me
   - [Getting help](#getting-help)
   - [HelloID docs](#helloid-docs)
 
-## Introduction
-
-_HelloID-Conn-Prov-Notification-Topdesk_ is a _notifcation_ connector. Topdesk provides a set of REST APIs that allow you to programmatically interact with its data. The [Topdesk API documentation](https://developers.topdesk.com/explorer/?page=supporting-files#/) provides details of API commands that are used.
-
 ## Getting started
 ### Prerequisites
 
@@ -77,7 +73,7 @@ The table below describes the different form fields from the template.
 
 | template key             | Description                                                                      | Mandatory |
 | ------------------------ | -------------------------------------------------------------------------------- | --------- |
-| scriptFlow               | Fixed value of Change (read-only)                                                | Yes       |
+| scriptFlow               | Fixed value of SMS (read-only)                                                   | Yes       |
 | recipients               | Mobile number where SMS should be delivered                                      | Yes       |
 | personName               | Name of the recipient                                                            | No        |
 | message                  | Body of the SMS Message                                                          | Yes       |
