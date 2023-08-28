@@ -86,7 +86,7 @@ The table below describes the different form fields from the template.
 
 > _For more information on how to configure a HelloID PowerShell connector, please refer to our [documentation](https://docs.helloid.com/en/provisioning/notifications--provisioning-/notification-systems--provisioning-) pages_
 
-> _If you need help, feel free to ask questions on our [TODOwhenchangingtopublicforumPost](https://forum.helloid.com/forum/helloid-connectors/provisioning/0000-helloid-conn-prov-target-messagebirdsms)_
+> _If you need help, feel free to ask questions on our [forum](https://forum.helloid.com/forum/helloid-connectors/provisioning/4929-helloid-conn-prov-notification-messagebirdsms)_
 
 ## HelloID docs
 
