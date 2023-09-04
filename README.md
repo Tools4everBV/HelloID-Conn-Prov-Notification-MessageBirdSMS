@@ -1,7 +1,12 @@
 # HelloID-Conn-Prov-Notification-MessageBirdSMS
-| :information_source: Information                                                                                                                                                                                                                                                                                                                                                       |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements. |
+
+| :warning: Warning |
+|:---------------------------|
+| Please be aware that the current notifications only can be triggered by built-in events. For other applications please use the Target connector [HelloID Topdesk target system](https://github.com/Tools4everBV/HelloID-Conn-Prov-Target-Topdesk) |
+
+| :information_source: Information |
+|:---------------------------|
+| This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
 <br />
 <p align="center"> 
   <img src="https://developers.messagebird.com/img/glyph.svg">
@@ -11,18 +16,19 @@
 
 ## Introduction
 
-_HelloID-Conn-Prov-Notification-MessageBirdSMS_ is a _notifcation_ connector. MessageBird provides a set of REST APIs that allow you to programmatically interact with its data. The [MessageBird API documentation](https://developers.messagebird.com/api/) provides details of API commands that are used.
+_HelloID-Conn-Prov-Notification-MessageBirdSMS_ is a _notifcation_ connector. MessageBird provides a set of REST APIs that allow you to programmatically interact with its data. The [MessageBird SMS API documentation](https://developers.messagebird.com/api/sms-messaging/#api-endpoint) provides details of API commands that are used.
 
 ## Table of contents
 
 - [HelloID-Conn-Prov-Notification-MessageBirdSMS](#helloid-conn-prov-notification-messagebirdsms)
   - [Table of contents](#table-of-contents)
   - [Introduction](#introduction)
+  - [Table of contents](#table-of-contents-1)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
-    - [Connection settings](#connection-settings)    
-    - [Templates](#templates)    
-    - [SMS](#sms)  
+    - [Connection settings](#connection-settings)
+    - [Templates](#templates)
+      - [SMS](#sms)
   - [Getting help](#getting-help)
   - [HelloID docs](#helloid-docs)
 
