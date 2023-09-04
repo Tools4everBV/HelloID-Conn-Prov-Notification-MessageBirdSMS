@@ -2,7 +2,7 @@
 
 | :warning: Warning |
 |:---------------------------|
-| Please be aware that the current notifications only can be triggered by built-in events. For other applications please use the Target connector [HelloID Topdesk target system](https://github.com/Tools4everBV/HelloID-Conn-Prov-Target-Topdesk) |
+| Please be aware that the current notifications only can be triggered by built-in events.  |
 
 | :information_source: Information |
 |:---------------------------|
@@ -41,11 +41,11 @@ _HelloID-Conn-Prov-Notification-MessageBirdSMS_ is a _notifcation_ connector. Me
 
 The following settings are required to connect to the API.
 
-| Setting              | Description                                               | Mandatory |
-| -------------------- | --------------------------------------------------------- | --------- |
-| BaseUrl              | The URL to the API                                        | Yes       |
-| AccessKey            | The AccessKey to connect to the API                       | Yes       |
-| Sending From         | Name of SMS sender which appears in the phong display     | Yes       |
+| Setting              | Description                                                | Mandatory |
+| -------------------- | ---------------------------------------------------------  | --------- |
+| BaseUri              | The BaseURI of the Messagebird API endpoint(s)             | Yes       |
+| AccessKey            | AccessKey for Messagebird API. Follow the [MessageBird Tutorial on how to create the access key](https://developers.messagebird.com/tutorials/getting-started-101/)  | Yes       |
+| Sending From         | The sender of the message. This can be a telephone number (including country code) or an alphanumeric string. In case of an alphanumeric string, the maximum length is 11 characters     | Yes       |
 
 ### Templates
 
@@ -55,34 +55,32 @@ There is one templates.
 |                                                                                                                                             |
 | Please keep in mind that the key form field names in the templates are used in the notification.ps1 changing them will break the connector. |
 
-It is possible to hide or disable (make them read-only) certain form fields if they are not used or should not be changed. For example, the branch should always be 'Baarn' and the field must be hidden in the configuration:
+It is possible to hide or disable (make them read-only) certain form fields if they are not used or should not be changed. For example, the scriptFlow should always be 'SMS' and the field must be hidden in the configuration:
 
 ```JSON
   {
-    "key": "Branch",
+    "key": "scriptFlow",
     "type": "input",
-    "defaultValue": "Baarn",
+    "defaultValue": "SMS",
     "templateOptions": {
-      "label": "Branch",
-      "description": "Fill in the branch name that is used in Topdesk. This is a mandatory lookup field.",
-      "required": true,
-    "disabled": true
+      "label": "Script flow",
+      "disabled": false
     },
-  "hide": true
+    "hide": true
   },
 ```
 
 #### SMS
-To create a form for changes the following template should be used: [template_change.json](https://github.com/Tools4everBV/HelloID-Conn-Prov-Notification-Topdesk/blob/main/template_change.json).
+To create a form for changes the following template should be used: [template_change.json](https://github.com/Tools4everBV/HelloID-Conn-Prov-Notification-MessageBirdSMS/blob/main/template_change.json).
 
 The table below describes the different form fields from the template.
 
-| template key             | Description                                                                      | Mandatory |
-| ------------------------ | -------------------------------------------------------------------------------- | --------- |
-| scriptFlow               | Fixed value of SMS (read-only)                                                   | Yes       |
-| recipients               | Mobile number where SMS should be delivered                                      | Yes       |
-| personName               | Name of the recipient                                                            | No        |
-| message                  | Body of the SMS Message                                                          | Yes       |
+| template key              | Description                                                                      | Mandatory |
+| ------------------------  | -------------------------------------------------------------------------------- | --------- |
+| scriptFlow                | Fixed value "SMS" (read-only)                                                    | Yes       |
+| Recipient mobile number   | Mobile number where SMS should be delivered                                      | Yes       |
+| Recipient name            | Name of the recipient                                                            | No        |
+| Message                   | Body of the SMS Message                                                          | Yes       |
 
 ## Getting help
 
