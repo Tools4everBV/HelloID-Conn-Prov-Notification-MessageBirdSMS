@@ -1,0 +1,40 @@
+[
+  {
+    "key": "scriptFlow",
+    "type": "input",
+    "defaultValue": "SMS",
+    "templateOptions": {
+      "label": "Script flow",
+      "disabled": false
+    },
+    "hide": true
+  },
+  {
+    "key": "recipients",
+    "type": "input",
+    "defaultValue": "{{ person.Contact.Personal.Phone.Mobile || \"+31612345678\" }}",
+    "templateOptions": {
+      "label": "Recipient mobile number",
+      "disabled": false
+    }
+  },
+  {
+    "key": "personName",
+    "type": "input",
+    "defaultValue": "{{ person.displayName || \"Helpdesk\"}}",
+    "templateOptions": {
+      "label": "Recipient name"
+    }
+  },
+  {
+    "key": "body",
+    "type": "textarea",
+    "defaultValue": "Dear {{person.Name.NickName}}, you can login with username: {{person.accounts.MicrosoftActiveDirectory.AdditionalFields.userPrincipalName}} with password: {{person.accounts.MicrosoftActiveDirectory.Password}}.",
+    "templateOptions": {
+      "label": "Message",
+      "placeholder": "",
+      "required": true,
+      "rows": 5
+    }
+  }
+]
