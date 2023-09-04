@@ -1,34 +1,36 @@
 [
-    {
-      "key": "baseUri",
-      "type": "input",
-      "defaultValue": "",
-      "templateOptions": {
-        "label": "Base URL of endpoint",
-        "placeholder": "Please enter some text",
-        "description": "Some optional description",
-        "required": true
-      }
-    },
-    {
-      "key": "accesskey",
-      "type": "input",
-      "defaultValue": "",
-      "templateOptions": {
-        "label": "AccessKey",
-        "type": "password",
-        "placeholder": "Please enter a accesskey",
-        "required": false
-      }
-    },
-    {
-      "key": "originator",
-      "type": "input",
-      "defaultValue": "",
-      "templateOptions": {
-        "label": "Sending from",
-        "placeholder": "Please enter a name or number",
-        "required": false
-      }
+  {
+    "key": "BaseUri",
+    "type": "input",
+    "defaultValue": "https://rest.messagebird.com/messages",
+    "templateOptions": {
+      "label": "Base URI",
+      "placeholder": "https://rest.messagebird.com/messages",
+      "description": "The BaseURI of the Messagebird API endpoint(s)",
+      "required": true
     }
-  ]
+  },
+  {
+    "key": "accesskey",
+    "type": "input",
+    "defaultValue": "",
+    "templateOptions": {
+      "label": "AccessKey",
+      "type": "password",
+      "placeholder": "aBCDefg12hiJKew8uRaJNQMrdMsfdds4fDde3",
+      "description": "AccessKey for Messagebird API",
+      "required": true
+    }
+  },
+  {
+    "key": "originator",
+    "type": "input",
+    "defaultValue": "",
+    "templateOptions": {
+      "label": "Sending from",
+      "placeholder": "Tools4ever",
+      "description": "The sender of the message. This can be a telephone number (including country code) or an alphanumeric string. In case of an alphanumeric string, the maximum length is 11 characters",
+      "required": true
+    }
+  }
+]
