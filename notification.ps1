@@ -1,3 +1,9 @@
+#####################################################
+# HelloID-Conn-Prov-Notification-MessageBird
+#
+# Version: 1.0.0
+#####################################################
+
 # Initialize default values
 $success = $false
 
@@ -10,111 +16,68 @@ switch ($($actionContext.Configuration.IsDebug)) {
     $false { $VerbosePreference = 'SilentlyContinue' }
 }
 
-function Set-AuthorizationHeaders {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $AccessKey
-    )
-    
-    # Set authentication headers
-    $authHeaders = [System.Collections.Generic.Dictionary[string, string]]::new()    
-    $authHeaders.Add("Content-Type", "application/json")
-    Write-Output $authHeaders
-}
+try {
+    if ($($actionContext.TemplateConfiguration.scriptFlow) -eq "SMS") {
+        # Execute script flow SMS
+        Write-Verbose "Sending notification for: [$($personContext.Person.DisplayName)]"
 
-function Invoke-MessageBirdRestMethod {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $Method,
+        # Set authorizationheaders
+        $headers = [System.Collections.Generic.Dictionary[string, string]]::new()
+        $headers.Add("Authorization", "AccessKey $($actionContext.Configuration.accesskey)")
 
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $Uri,
+        $body = @{
+            recipients = $actionContext.TemplateConfiguration.recipients
+            originator = $actionContext.Configuration.originator
+            body       = $actionContext.TemplateConfiguration.body
+        } | ConvertTo-Json
 
-        [object]
-        $Body,
-
-        [string]
-        $ContentType = 'application/json',
-
-        [Parameter(Mandatory)]
-        [System.Collections.IDictionary]
-        $Headers
-    )
-    process {
-        try {
-            $splatParams = @{
-                Uri         = $Uri
-                Headers     = $Headers
-                Method      = $Method                
-                Body        = $Body
-            }
-  
-            $response = Invoke-RestMethod @splatParams 
-            Write-Output $response
+        $splatParams = @{
+            Uri         = $actionContext.Configuration.baseUri
+            Headers     = $headers
+            Method      = 'POST'
+            Body        = ([System.Text.Encoding]::UTF8.GetBytes($body))
+            ContentType = "application/json"
+            ErrorAction = "Stop"
         }
-        catch {
-            $PSCmdlet.ThrowTerminatingError($_)
-        }
-    }
-}
 
-try {    
-    if (-Not($actionContext.DryRun -eq $true)) {
-        
-        if ($($actionContext.TemplateConfiguration.scriptFlow) -eq "SendSMS") {
-            # Execute script flow SendSMS
-            $endpoint = $actionContext.Configuration.baseUri
-
-            $authHeaders = Set-AuthorizationHeaders -AccessKey $($actionContext.Configuration.accesskey) 
-            
-            $body = @{
-                recipients = $actionContext.TemplateConfiguration.recipients
-                originator = $actionContext.Configuration.originator
-                body       = $actionContext.TemplateConfiguration.body                
-            } | ConvertTo-Json
-
-            $splatParams = @{
-                Method = "Post"
-                Uri = $endpoint
-                Headers = $authHeaders
-                Body = $body 
-            }
-            $response = Invoke-MessageBirdRestMethod @splatParams
+        if (-Not($actionContext.DryRun -eq $true)) {
+            $response = Invoke-RestMethod @splatParams
 
             $outputContext.AuditLogs.Add([PSCustomObject]@{
-                Message = "Sending notification [$($actionContext.TemplateConfiguration.scriptFlow)] for [$($personContext.Person.DisplayName)] with number [$($response.id)] was successful."
-                IsError = $false
-            })
-
-
-        } else {
-            # Execute script flow two
+                    Message = "Successfully sent MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]"
+                    IsError = $false
+                })
+        }
+        else {
+            # Log what would happen during enforcement
+            Write-Warning "DryRun: Would Send notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]"
+            Write-Verbose "Uri: $($splatParams.Uri)"
+            Write-Verbose "Body: $($body)"
         }
     }
-} catch {
+    else {
+        throw "Incorrect scriptFlow"
+    }
+}
+catch {
     $ex = $PSItem    
-    Write-Verbose -Verbose $ex.Exception.Message
+    Write-Verbose "Error: $($ex.Exception.Message)"
+    Write-Verbose "Uri: $($splatParams.Uri)"
+    Write-Verbose "Body: $($body)"
+    Write-Verbose "SplatParams: $($splatParams | ConvertTo-Json)"
+
     switch ($ex.Exception.Message) {       
         'Incorrect scriptFlow' {
             $errorMessage = "Incorrect scriptFlow [$($actionContext.TemplateConfiguration.scriptFlow)]"
         }
         
         default {
-            Write-Verbose ($ex | ConvertTo-Json) # Debug - Test
             if ($($ex.Exception.GetType().FullName -eq 'Microsoft.PowerShell.Commands.HttpResponseException') -or
                 $($ex.Exception.GetType().FullName -eq 'System.Net.WebException')) {
-                $errorMessage = "Could not send MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]. Error: $($ex.ErrorDetails.Message)"
+                $errorMessage = "Error sending MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]. Error: $($ex.ErrorDetails.Message)"
             }
             else {
-                $errorMessage = "Could not send MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]. Error: $($ex.Exception.Message) $($ex.ScriptStackTrace)"
+                $errorMessage = "Error sending MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]. Error: $($ex.Exception.Message) $($ex.ScriptStackTrace)"
             } 
             $outputContext.AuditLogs.Add([PSCustomObject]@{
                     Message = $errorMessage
@@ -122,22 +85,12 @@ try {
                 })
         }
     }
-} finally {
-    $message = "Error in sending MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)]."    
-    $isError = $true
-    
+}
+finally {
     # Check if auditLogs contains errors, if no errors are found, set success to true
     if (-NOT($outputContext.AuditLogs.isError -contains $true)) {
-        $message = "Sending MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for: [$($personContext.Person.DisplayName)] finished."
-        $isError = $false
         $success = $true
     }
 
-    $outputContext.AuditLogs.Add([PSCustomObject]@{
-        Message = $message
-        IsError = $isError
-    })
     $outputContext.Success = $success
 }
-
-
