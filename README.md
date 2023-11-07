@@ -78,6 +78,7 @@ The table below describes the different form fields from the template.
 | template key              | Description                                                                      | Mandatory |
 | ------------------------  | -------------------------------------------------------------------------------- | --------- |
 | scriptFlow                | Fixed value "SMS" (read-only)                                                    | Yes       |
+| Time                      | Optional, the scheduled time of the message in format HH:mm:ss                   | Yes       |
 | Recipient mobile number   | Mobile number where SMS should be delivered                                      | Yes       |
 | Recipient name            | Name of the recipient                                                            | No        |
 | Message                   | Body of the SMS Message                                                          | Yes       |

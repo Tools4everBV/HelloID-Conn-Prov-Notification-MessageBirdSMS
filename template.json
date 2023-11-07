@@ -10,6 +10,17 @@
     "hide": true
   },
   {
+    "key": "time",
+    "type": "input",
+    "defaultValue": "08:00:00",
+    "templateOptions": {
+      "label": "Time",
+      "placeholder": "08:00:00",
+      "required": false,
+      "description": "Optional, the scheduled time of the message in format HH:mm:ss"
+    }
+  },
+  {
     "key": "recipients",
     "type": "input",
     "defaultValue": "{{ person.Contact.Personal.Phone.Mobile || \"+31612345678\" }}",
