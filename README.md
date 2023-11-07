@@ -71,7 +71,7 @@ It is possible to hide or disable (make them read-only) certain form fields if t
 ```
 
 #### SMS
-To create a form for changes the following template should be used: [template_change.json](https://github.com/Tools4everBV/HelloID-Conn-Prov-Notification-MessageBirdSMS/blob/main/template_change.json).
+To create a form for SMS the following template should be used: [template.json](https://github.com/Tools4everBV/HelloID-Conn-Prov-Notification-MessageBirdSMS/blob/main/template.json).
 
 The table below describes the different form fields from the template.
 
