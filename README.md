@@ -1,13 +1,11 @@
 # HelloID-Conn-Prov-Notification-MessageBirdSMS
 
-| :warning: Warning |
-|:---------------------------|
-| Please be aware that the current notifications only can be triggered by built-in events.  |
+> [!IMPORTANT]
+> Please be aware that the notifications only can be triggered by [events](https://docs.helloid.com/en/provisioning/notifications--provisioning-/notification-events--provisioning-.html) and cannot be used as entitlements.
 
-| :information_source: Information |
-|:---------------------------|
-| This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
-<br />
+> [!IMPORTANT]
+> This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.
+
 <p align="center"> 
   <img src="https://developers.messagebird.com/img/glyph.svg">
 </p>
