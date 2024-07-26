@@ -44,4 +44,4 @@ Additionally, you can specify exactly when HelloID sends out SMS messages, ensur
 
 # Integrating HelloID with other systems
 
-HelloID offers more than 200 connectors, allowing you to integrate the IAM solution with almost all popular source and target systems. 
+HelloID offers more than 200 connectors, allowing you to integrate the IAM solution with almost all popular source and target systems.
