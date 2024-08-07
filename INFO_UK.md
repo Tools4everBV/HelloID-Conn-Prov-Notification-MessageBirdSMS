@@ -1,4 +1,4 @@
-## Bird Connector from HelloID
+## Bird Notification Connector for HelloID
 
 The identity & access management (IAM) solution HelloID by Tools4ever uses notifications to keep users informed about significant events. HelloID uses email notifications for this purpose. However, with the Bird Connector, HelloID also integrates with Bird, a platform that offers SMS communication services. This connector enables the automation of sending SMS notifications, either supplementing or replacing the standard email notifications. This article provides more information about this connector and its functionalities.
 
