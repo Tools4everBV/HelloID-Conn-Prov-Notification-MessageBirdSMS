@@ -1,4 +1,4 @@
-## Bird Connector van HelloID
+## Bird Notificatie Connector voor HelloID
 
 De identity & access management (IAM)-oplossing HelloID van Tools4ever maakt gebruik van notificaties om gebruikers van belangrijke gebeurtenissen op de hoogte te stellen. Standaard zet HelloID hiervoor e-mailnotificaties in. Via de Bird Connector -voorheen beschikbaar als MessageBird - van HelloID integreert de IAM-oplossing echter ook met Bird, een platform voor onder meer communicatie via sms. Deze connector automatiseert het verzenden van sms-notificaties als aanvulling op of vervanging van de standaard e-mailnotificaties. In dit artikel lees je meer over deze connector en de mogelijkheden. 
 
@@ -22,19 +22,19 @@ Het gebruik van sms-notificaties biedt diverse voordelen, waarvan we er enkele u
 
 | Voordeel	| Toelichting |
 | -------------- | -----------| 
-| Snelle communicatie|	De integratie met Bird maakt het mogelijk belangrijke berichten via sms direct af te leveren bij gebruikers. Zo kan je de communicatie met gebruikers versnellen, en weet je zeker dat zij op het juiste moment de juiste notificatie onder ogen krijgen.|
-|Verhoogde responsiviteit |	Gebruikers ontvangen meldingen sneller, en kunnen daardoor eerder reageren op kritieke situaties. Prettig, want sommige situaties kunnen simpelweg niet wachten en vereisen direct handelen. Denk daarbij aan problemen met het geautomatiseerd aanmaken van een gebruikersaccount waardoor een gebruiker niet aan de slag kan. Of juist de onverwachte verwijdering van een gebruiker uit je bronsysteem, waarbij je wilt zeker stellen dat de autorisaties van deze gebruiker zijn ingetrokken.|
-| Betrouwbaarheid |	Met sms-notificaties beschik je naast e-mail-notificaties over een alternatief communicatiekanaal. Prettig, want e-mailberichten kunnen bijvoorbeeld onverhoopt in een spamfilter blijven hangen. Ook voorkom je dat gebruikers door bijvoorbeeld problemen met een mailserver notificaties niet of te laat ontvangen. Sms-notificaties verhogen dan ook de betrouwbaarheid van notificaties.|
-| Verbeterd communicatiebereik |	Via sms-notificaties verbeter je het bereik van communicatie. Zo controleert niet iedere gebruiker met regelmaat zijn e-mailaccount, waardoor e-mailnotificaties aan de aandacht kunnen ontsnappen. |
+| **Snelle communicatie** |	De integratie met Bird maakt het mogelijk belangrijke berichten via sms direct af te leveren bij gebruikers. Zo kan je de communicatie met gebruikers versnellen, en weet je zeker dat zij op het juiste moment de juiste notificatie onder ogen krijgen.|
+| **Verhoogde responsiviteit** |	Gebruikers ontvangen meldingen sneller, en kunnen daardoor eerder reageren op kritieke situaties. Prettig, want sommige situaties kunnen simpelweg niet wachten en vereisen direct handelen. Denk daarbij aan problemen met het geautomatiseerd aanmaken van een gebruikersaccount waardoor een gebruiker niet aan de slag kan. Of juist de onverwachte verwijdering van een gebruiker uit je bronsysteem, waarbij je wilt zeker stellen dat de autorisaties van deze gebruiker zijn ingetrokken.|
+| **Betrouwbaarheid** |	Met sms-notificaties beschik je naast e-mail-notificaties over een alternatief communicatiekanaal. Prettig, want e-mailberichten kunnen bijvoorbeeld onverhoopt in een spamfilter blijven hangen. Ook voorkom je dat gebruikers door bijvoorbeeld problemen met een mailserver notificaties niet of te laat ontvangen. Sms-notificaties verhogen dan ook de betrouwbaarheid van notificaties.|
+| **Verbeterd communicatiebereik** |	Via sms-notificaties verbeter je het bereik van communicatie. Zo controleert niet iedere gebruiker met regelmaat zijn e-mailaccount, waardoor e-mailnotificaties aan de aandacht kunnen ontsnappen. |
 
 
 ## Gegevensuitwisseling tussen HelloID en Bird
 
 Voor het versturen van sms-notificaties wisselt HelloID allerlei informatie uit met de Bird Connector. Het gaat daarbij om: 
 
-*	Gebruikersinformatie: Dit zijn basisgegevens zoals het telefoonnummer van de gebruiker.
-*	Meldingsinhoud: De tekstuele inhoud van de sms-notificatie.
-*	Verzendstatus: Een bevestiging van de status van het afleveren van berichten, zodat direct duidelijk is of het verzenden is gelukt. 
+*	**Gebruikersinformatie:** Dit zijn basisgegevens zoals het telefoonnummer van de gebruiker.
+*	**Meldingsinhoud:** De tekstuele inhoud van de sms-notificatie.
+*	**Verzendstatus:** Een bevestiging van de status van het afleveren van berichten, zodat direct duidelijk is of het verzenden is gelukt. 
 
 ## Gegevensuitwisseling op maat  
 
