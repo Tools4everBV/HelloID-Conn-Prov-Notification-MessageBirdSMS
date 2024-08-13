@@ -1,5 +1,3 @@
-## Bird Notificatie Connector voor HelloID
-
 De identity & access management (IAM)-oplossing HelloID van Tools4ever maakt gebruik van notificaties om gebruikers van belangrijke gebeurtenissen op de hoogte te stellen. Standaard zet HelloID hiervoor e-mailnotificaties in. Via de Bird Connector -voorheen beschikbaar als MessageBird - van HelloID integreert de IAM-oplossing echter ook met Bird, een platform voor onder meer communicatie via sms. Deze connector automatiseert het verzenden van sms-notificaties als aanvulling op of vervanging van de standaard e-mailnotificaties. In dit artikel lees je meer over deze connector en de mogelijkheden. 
 
 ## Wat is Bird?
