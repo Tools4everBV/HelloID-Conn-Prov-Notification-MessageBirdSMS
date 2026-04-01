@@ -4,16 +4,9 @@
 # Version: 1.1.0
 #####################################################
 # Initialize default values
-$success = $false
 
 # Enable TLS1.2
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
-
-# Set debug logging
-switch ($($actionContext.Configuration.IsDebug)) {
-    $true { $VerbosePreference = 'Continue' }
-    $false { $VerbosePreference = 'SilentlyContinue' }
-}
 
 try {
     if ($($actionContext.TemplateConfiguration.scriptFlow) -eq "SMS") {
@@ -55,14 +48,9 @@ try {
         }
 
         if (-Not($actionContext.DryRun -eq $true)) {
-            if ("scheduledDatetime" -in $sendMessageBody.Keys) {
-                Write-Verbose "Scheduling MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for [$($personContext.Person.DisplayName)] to [$($sendMessageBody.recipients)] at [$($sendMessageBody.scheduledDatetime)]"
-            }
-            else {
-                Write-Verbose "Sending MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for [$($personContext.Person.DisplayName)] to [$($sendMessageBody.recipients)]"
-            }
-
-            $response = Invoke-RestMethod @splatParams
+            
+            $null = Invoke-RestMethod @splatParams
+            $outputContext.Success = $true
 
             if ("scheduledDatetime" -in $sendMessageBody.Keys) {
                 $outputContext.AuditLogs.Add([PSCustomObject]@{
@@ -85,8 +73,6 @@ try {
             else {
                 Write-Warning "DryRun: Would Send MessageBird notification [$($actionContext.TemplateConfiguration.scriptFlow)] for [$($personContext.Person.DisplayName)] to [$($sendMessageBody.recipients)]"
             }
-            Write-Verbose "Uri: $($splatParams.Uri)"
-            Write-Verbose "Body: $($sendMessageBody)"
         }
     }
     else {
@@ -95,11 +81,7 @@ try {
 }
 catch {
     $ex = $PSItem    
-    Write-Verbose "Error: $($ex.Exception.Message)"
-    Write-Verbose "Uri: $($splatParams.Uri)"
-    Write-Verbose "Body: $($sendMessageBody)"
-    Write-Verbose "SplatParams: $($splatParams | ConvertTo-Json)"
-
+    
     switch ($ex.Exception.Message) {       
         'Incorrect scriptFlow' {
             $errorMessage = "Incorrect scriptFlow [$($actionContext.TemplateConfiguration.scriptFlow)]"
@@ -130,12 +112,4 @@ catch {
             Message = $errorMessage
             IsError = $true
         })
-}
-finally {
-    # Check if auditLogs contains errors, if no errors are found, set success to true
-    if (-NOT($outputContext.AuditLogs.isError -contains $true)) {
-        $success = $true
-    }
-
-    $outputContext.Success = $success
 }
